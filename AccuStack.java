@@ -3,6 +3,7 @@ package TspResolver;
 import dijkstra.v2.DijkstraAlgorithm;
 
 import java.util.Hashtable;
+import java.util.Random;
 import java.util.Stack;
 
 public class AccuStack<T> {
@@ -13,6 +14,7 @@ public class AccuStack<T> {
     public Hashtable<Integer, Integer> getIndexes() { return indexes; }
     public int getValue() { return value; }
     public Stack<T> getStack() { return stack; }
+    private int duplicatedKeys = 0;
 
     AccuStack(){};
     AccuStack(int value){ this.value = value; }

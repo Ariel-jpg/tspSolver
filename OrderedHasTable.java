@@ -1,21 +1,21 @@
 package TspResolver;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Hashtable;
-import java.util.List;
+import java.util.*;
 
-public class OrderedHasTable<K, E> {
+public class OrderedHasTable<K, E> implements Cloneable {
     Hashtable<K, E> hashtable = new Hashtable<>();
     SNode<K, E> head = new SNode<>(null, null);
     Comparator<E> comparator;
 
     OrderedHasTable(Comparator<E> comparator){ this.comparator = comparator; }
 
+    public Collection<E> values() { return hashtable.values(); }
+
     /**
      * @implNote O(1)
      */
     public E get(K key){ return hashtable.get(key); }
+    public boolean containsKey(K key) { return hashtable.containsKey(key); }
 
     /**
      * @implNote O(n)
@@ -74,5 +74,16 @@ public class OrderedHasTable<K, E> {
             } else if(comparator.compare(newNode.value, node.next.value) == 0) node.next.addHashCode(newNode.hashCodesList.get(0));
             else putInList(node.next, newNode);
         } else node.next = newNode;
+    }
+
+    @Override
+    public OrderedHasTable<K, E> clone() {
+        try {
+            OrderedHasTable clone = (OrderedHasTable) super.clone();
+            // TODO: copy mutable state here, so the clone can't change the internals of the original
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 }
