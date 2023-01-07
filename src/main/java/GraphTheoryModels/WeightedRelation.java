@@ -5,8 +5,8 @@ import java.util.List;
 
 // Simple weighted Relation
 public class WeightedRelation extends SimpleRelation {
-    public WeightedRelation(String idV1, String idV2, int weight){
-        super(idV1, idV2);
+    public WeightedRelation(Vertex v1, Vertex v2, int weight){
+        super(v1, v2);
         this.weight = weight;
     }
 

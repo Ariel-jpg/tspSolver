@@ -2,6 +2,7 @@ package GraphTheoryModels;
 
 import DataStructures.OrderedHasTable;
 
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
@@ -21,10 +22,15 @@ public class Vertex {
     public WeightedRelation getRelationWith(Vertex w){ return relations.get(w.getId()); }
     public WeightedRelation getMinRelation(){ return relations.getMin(); }
 
+    public void setRelations(Collection<WeightedRelation> relations){
+        for(WeightedRelation r: relations)
+            addRelation(r);
+    }
+
     /**
      * @implNote This method must be used to obtain, immutably, the minimum relations that the vertex possesses and thus operate on them.
      */
-    public PriorityQueue<WeightedRelation> getOrderedRelation(){ return relations.getOrderedValues(); }
+    public PriorityQueue<WeightedRelation> getOrderedRelations(){ return relations.getOrderedValues(); }
 
     // Implementation details --------------
 

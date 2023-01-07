@@ -18,7 +18,11 @@ public class AccuStack<E> extends Stack<E> {
     public synchronized E pop() {
         E element = super.pop();
 
-        stackValue -= itemValues.remove(element.hashCode());
+        // Only if there are duplicate keys
+        if(!itemValues.isEmpty())
+            stackValue -= itemValues.remove(element.hashCode());
+
+
         return element;
     }
 
