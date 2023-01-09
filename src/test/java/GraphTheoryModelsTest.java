@@ -1,6 +1,6 @@
+import DataStructures.AccuStack;
 import GraphTheoryModels.DirectedRelation;
 import GraphTheoryModels.Vertex;
-import GraphTheoryModels.WeightedGraph;
 import GraphTheoryModels.WeightedRelation;
 import org.junit.Test;
 
@@ -20,11 +20,19 @@ public class GraphTheoryModelsTest {
         generateMatrix_2(matrix);
 
         HeldKarp m = new HeldKarp(matrix, 2);
+        long i1 = System.currentTimeMillis();
         System.out.println(m.calculateHeldKarp());
+        long f1 = System.currentTimeMillis() - i1;
+
         System.out.println(m.getOpt());
 
-        WeightedGraph g = new WeightedGraph(relations_2);
-        g.getMinHamiltonianCircuit();
+        WeightedGraph_2 g = new WeightedGraph_2(relations_1);
+        WeightedGraph_1 g2 = new WeightedGraph_1(relations_1);
+        g2.getMinHamiltonianCircuit();
+
+        long i2 = System.currentTimeMillis();
+        g.getMinHC();
+        long f2 = System.currentTimeMillis() - i2;
 
         System.out.println("a");
     }
@@ -119,6 +127,63 @@ public class GraphTheoryModelsTest {
         }
     }
 
+
+    @Test public void generalTestsWeightedGraph_2(){
+        Hashtable<String, Vertex> vertices = new Hashtable<>();
+
+        Vertex A = new Vertex("A"), B = new Vertex("B"), C = new Vertex("C"), D = new Vertex("D");
+
+        WeightedRelation wr1 = new WeightedRelation(A, B, 8);
+        WeightedRelation wr2 = new WeightedRelation(A, C, 2);
+        WeightedRelation wr3 = new WeightedRelation(A, D, 5);
+
+        WeightedRelation wr4 = new WeightedRelation(B, C, 10);
+        WeightedRelation wr5 = new WeightedRelation(B, D, 3);
+
+        WeightedRelation wr6 = new WeightedRelation(C, D, 1);
+
+        A.addRelation(wr1);
+        A.addRelation(wr2);
+        A.addRelation(wr3);
+
+        B.addRelation(wr1);
+        B.addRelation(wr4);
+        B.addRelation(wr5);
+
+        C.addRelation(wr2);
+        C.addRelation(wr4);
+        C.addRelation(wr6);
+
+        D.addRelation(wr3);
+        D.addRelation(wr5);
+        D.addRelation(wr6);
+
+        vertices.put(A.getId(), A);
+        vertices.put(B.getId(), B);
+        vertices.put(C.getId(), C);
+        vertices.put(D.getId(), D);
+
+        AccuStack<Vertex> acc = new AccuStack<>(), l;
+        acc.push(A, 0);
+        acc.push(B, 123);
+        acc.push(C, 43);
+        acc.push(D, 123);
+
+        l = (AccuStack<Vertex>) acc.clone();
+        acc.pop();
+        acc.pop();
+        acc.pop();
+        acc.pop();
+
+        System.out.println(l.size());
+
+
+        WeightedGraph_2 g = new WeightedGraph_2(vertices);
+        g.getMinHC();
+
+        System.out.println("a");
+    }
+
     private Hashtable<String, Vertex> getGraphTestRelations_2(){
         Vertex CA = new Vertex("0"), LP = new Vertex("1"), CBA = new Vertex("2"), LR = new Vertex("3"), CO = new Vertex("4"), FO = new Vertex("5"), R = new Vertex("6"), TF = new Vertex("7"), TU = new Vertex("8"), JU = new Vertex("9");
 
@@ -199,7 +264,6 @@ public class GraphTheoryModelsTest {
         JU.setRelations(JURelations);
 
         Hashtable<String, Vertex> h = new Hashtable<>();
-        h.put(CA.getId(), CA);
         h.put(LP.getId(), LP);
         h.put(CBA.getId(), CBA);
         h.put(LR.getId(), LR);
@@ -209,6 +273,7 @@ public class GraphTheoryModelsTest {
         h.put(TF.getId(), TF);
         h.put(TU.getId(), TU);
         h.put(JU.getId(), JU);
+        h.put(CA.getId(), CA);
 
         return h;
     }
@@ -222,7 +287,7 @@ public class GraphTheoryModelsTest {
         WeightedRelation wr4 = new WeightedRelation(A, E, 8);
 
         WeightedRelation wr5 = new WeightedRelation(B, C, 20);
-//        WeightedRelation wr6 = new WeightedRelation(B, D, 15);
+        WeightedRelation wr6 = new WeightedRelation(B, D, 15);
         WeightedRelation wr7 = new WeightedRelation(B, E, 7);
 
         WeightedRelation wr8 = new WeightedRelation(C, D, 3);
@@ -237,7 +302,7 @@ public class GraphTheoryModelsTest {
 
         B.addRelation(wr1);
         B.addRelation(wr5);
-//        B.addRelation(wr6);
+        B.addRelation(wr6);
         B.addRelation(wr7);
 
         C.addRelation(wr2);
@@ -246,7 +311,7 @@ public class GraphTheoryModelsTest {
         C.addRelation(wr9);
 
         D.addRelation(wr3);
-//        D.addRelation(wr6);
+        D.addRelation(wr6);
         D.addRelation(wr8);
         D.addRelation(wr10);
 

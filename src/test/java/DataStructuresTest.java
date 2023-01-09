@@ -1,10 +1,28 @@
 import DataStructures.AccuStack;
+import DataStructures.AccuStackImm;
 import DataStructures.OrderedHasTable;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class DataStructuresTest {
+    @Test
+    public void TestImmutableAccuStack(){
+        AccuStackImm<String> l = new AccuStackImm<>();
+        l.push("A", 23);
+        l.push("B", 23);
+        l.push("C", 1233);
+
+        AccuStackImm<String> l1 = l.push("SD", 23);
+        AccuStackImm<String> l2 = l1.push("A", 23);
+        AccuStackImm<String> l3 = l1.push("B", 1);
+
+        assertThat(l2.containsItem("B")).isFalse();
+        assertThat(l1.containsItem("A")).isFalse();
+
+        System.out.println("a");
+    }
+
     @Test
     public void testOrderedHashTable() {
         OrderedHasTable<String, Integer> h = new OrderedHasTable<>((o1, o2) -> {

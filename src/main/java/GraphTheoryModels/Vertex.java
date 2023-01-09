@@ -10,7 +10,12 @@ public class Vertex {
     String id;
 
     // The relations are indexed by the other Vertex (v --> w, so the index is w)
-    OrderedHasTable<String, WeightedRelation> relations = new OrderedHasTable<>(Comparator.comparingInt(WeightedRelation::getWeight));
+    public OrderedHasTable<String, WeightedRelation> relations = new OrderedHasTable<>(Comparator.comparingInt(WeightedRelation::getWeight));
+
+//    @Override
+//    public int hashCode() {
+//        return id.charAt(0);
+//    }
 
     public Vertex(String id){ this.id = id; }
 

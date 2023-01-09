@@ -1,7 +1,8 @@
 package GraphTheoryModels;
 
 public abstract class SimpleRelation {
-    String idV1, idV2;
+    public String idV1;
+    public String idV2;
     int weight = 0;
 
     public SimpleRelation(Vertex v1, Vertex v2) { this.idV1 = v1.getId(); this.idV2 = v2.getId(); }
