@@ -32,6 +32,20 @@ public final class AccuStackImm<E> {
         this.elementData[size - 1] = item;
     };
 
+    private AccuStackImm(int size, int stackValue, Hashtable<Integer, Integer> itemValues, Object[] elementData) {
+        this.size = size;
+        this.elementData = new Object[size];
+        this.itemValues = new Hashtable<>(size);
+        this.stackValue = stackValue - itemValues.get(elementData[size].hashCode()); // size = size - 1
+
+        for(Integer key: itemValues.keySet())
+            if (!(key.equals(elementData[size].hashCode()))) this.itemValues.put(key, itemValues.get(key));
+
+        for(int i = 0; i < size; i++)
+            this.elementData[i] = elementData[i];
+
+    }
+
     public AccuStackImm<E> push(E item, int itemValue){
         return new AccuStackImm<E>(item, size + 1, this.stackValue + itemValue, itemValue, itemValues, elementData);
     }
@@ -43,4 +57,9 @@ public final class AccuStackImm<E> {
     public int getStackValue(){ return stackValue; }
     public int getSize(){ return size; }
 
+    public AccuStackImm<E> pop(){
+        return new AccuStackImm<E>(size-1, stackValue, itemValues, elementData);
+    }
+
+    public boolean isEmpty(){ return size == 0; }
 }

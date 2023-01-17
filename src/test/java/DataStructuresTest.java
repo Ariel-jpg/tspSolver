@@ -16,9 +16,21 @@ public class DataStructuresTest {
         AccuStackImm<String> l1 = l.push("SD", 23);
         AccuStackImm<String> l2 = l1.push("A", 23);
         AccuStackImm<String> l3 = l1.push("B", 1);
+        AccuStackImm<String> l4;
 
         assertThat(l2.containsItem("B")).isFalse();
         assertThat(l1.containsItem("A")).isFalse();
+
+        l2 = l2.pop();
+        l4 = l3.pop();
+
+        assertThat(l2.getStackValue()).isEqualTo(l1.getStackValue());
+        assertThat(l4.getStackValue()).isEqualTo(l1.getStackValue());
+
+        assertThat(l2.peek()).isEqualTo(l1.peek());
+        assertThat(l4.peek()).isEqualTo(l1.peek());
+
+        assertThat(l4.containsItem(l3.peek())).isFalse();
 
         System.out.println("a");
     }

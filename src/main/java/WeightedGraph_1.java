@@ -1,4 +1,5 @@
 import DataStructures.AccuStack;
+import DataStructures.AccuStackImm;
 import GraphTheoryModels.DirectedRelation;
 import GraphTheoryModels.SimpleRelation;
 import GraphTheoryModels.Vertex;
@@ -33,7 +34,7 @@ public class WeightedGraph_1 {
 
     private Vertex getVertex(String vertexId){ return vertices.get(vertexId); }
 
-    public void getMinHamiltonianCircuit(){
+    public AccuStack<Vertex> getMinHamiltonianCircuit(){
         PriorityQueue<AccuStack<Vertex>> S = new PriorityQueue<>(Comparator.comparingInt(AccuStack::getValue));
 
         do {
@@ -58,21 +59,23 @@ public class WeightedGraph_1 {
 
         int i = 0;
 
-        do {
-            AccuStack<Vertex> minCH = S.remove();
-            int chWeight = minCH.getValue();
 
-            Vertex v = minCH.pop();
-            System.out.print(++i + " - Min ch: " + v.getId());
-
-            while (!minCH.isEmpty()) {
-                v = minCH.pop();
-
-                System.out.print(" <-- " + v.getId());
-            }
-
-            System.out.println(" : " + chWeight);
-        } while (!S.isEmpty());
+        return S.remove();
+//        do {
+//            AccuStack<Vertex> minCH = S.remove();
+//            int chWeight = minCH.getValue();
+//
+//            Vertex v = minCH.pop();
+//            System.out.print(++i + " - Min ch: " + v.getId());
+//
+//            while (!minCH.isEmpty()) {
+//                v = minCH.pop();
+//
+//                System.out.print(" <-- " + v.getId());
+//            }
+//
+//            System.out.println(" : " + chWeight);
+//        } while (!S.isEmpty());
     }
 
     private void getMinHamiltonianCircuitFrom(Vertex origin, DirectedRelation r, AccuStack<Vertex> hamiltonianCircuitOfOrigin){

@@ -1,4 +1,5 @@
 import DataStructures.AccuStack;
+import DataStructures.AccuStackImm;
 import GraphTheoryModels.DirectedRelation;
 import GraphTheoryModels.Vertex;
 import GraphTheoryModels.WeightedRelation;
@@ -6,6 +7,7 @@ import org.junit.Test;
 
 import HeldKarpA.HeldKarp;
 
+import javax.management.ValueExp;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,8 +28,8 @@ public class GraphTheoryModelsTest {
 
         System.out.println(m.getOpt());
 
-        WeightedGraph_2 g = new WeightedGraph_2(relations_1);
-        WeightedGraph_1 g2 = new WeightedGraph_1(relations_1);
+        WeightedGraph_2 g = new WeightedGraph_2(relations_2);
+        WeightedGraph_1 g2 = new WeightedGraph_1(relations_2);
         g2.getMinHamiltonianCircuit();
 
         long i2 = System.currentTimeMillis();
@@ -35,6 +37,72 @@ public class GraphTheoryModelsTest {
         long f2 = System.currentTimeMillis() - i2;
 
         System.out.println("a");
+    }
+
+
+    @Test
+    public void TestInMultipleCase(){
+        int max = 15;
+        int[][] matrix = new int[max][max];
+
+        Hashtable<String, Vertex> vertices = generateRandomGraphs(matrix, max);
+
+        HeldKarp hk = new HeldKarp(matrix, 0);
+        System.out.println(hk.calculateHeldKarp());
+        System.out.print(hk.getOpt() + " - ");
+
+        WeightedGraph_1 g1 = new WeightedGraph_1(vertices);
+        AccuStack<Vertex> localMin = g1.getMinHamiltonianCircuit();
+
+        WeightedGraph_2 g = new WeightedGraph_2(vertices, localMin.getValue());
+
+        AccuStackImm<Vertex> minCh = g.getMinHC();
+
+        assertThat(minCh.getStackValue()).isEqualTo(hk.getOpt());
+        System.out.println(minCh.getStackValue());
+    }
+
+    @Test
+    public void AutomateTestMultipleCases(){
+        for (int i = 0; i < 10; i++)
+            TestInMultipleCase();
+    }
+
+    private Hashtable<String, Vertex> generateRandomGraphs(int[][] matrix, int max){
+        List<Vertex> vertices = new ArrayList<>(max);
+        Hashtable<String, Vertex> vs = new Hashtable<>();
+
+        // Genero n vértices
+        for (int i = 0; i < max; i++)
+            vertices.add(new Vertex("V " + i));
+
+        Vertex vi, vj;
+
+        // Asigno relaciones entre ellos
+        for (int i = 0; i < max; i++){
+            for (int j = 0; j < max; j++){
+                vi = vertices.get(i);
+                vj = vertices.get(j);
+
+                int weight = (int) (Math.random() * 1000) + 100;
+
+
+                if(i < j) {
+                    WeightedRelation w = new WeightedRelation(vi, vj, weight);
+
+                    vi.addRelation(w);
+                    vj.addRelation(w);
+
+                    matrix[j][i] = weight;
+                    matrix[i][j] = weight;
+                }
+            }
+        }
+
+        for(Vertex v: vertices)
+            vs.put(v.getId(), v);
+
+        return vs;
     }
 
     private void generateMatrix_2(int[][] matrix){
@@ -228,7 +296,7 @@ public class GraphTheoryModelsTest {
         WeightedRelation COJU = new WeightedRelation(CO, JU, 742);
 
         WeightedRelation FOR = new WeightedRelation(FO, R, 1999);
-        WeightedRelation FOTF = new WeightedRelation(FO, TF, 3284);
+//        WeightedRelation FOTF = new WeightedRelation(FO, TF, 3284);
         WeightedRelation FOTU = new WeightedRelation(FO, TU, 703);
         WeightedRelation FOJU = new WeightedRelation(FO, JU, 750);
 
@@ -246,9 +314,11 @@ public class GraphTheoryModelsTest {
         List<WeightedRelation> CBARelations = Arrays.asList(CACBA, LPCBA, CBALR, CBACO, CBAFO, CBAR, CBATF, CBATU, CBAJU);
         List<WeightedRelation> LRRelations = Arrays.asList(CALR, LPLR, CBALR, LRCO, LRFO, LRR, LRTF, LRJU, LRTU);
         List<WeightedRelation> CORelations = Arrays.asList(CACO, LPCO, CBACO, LRCO, COFO, COR, COTU, COJU, COTF);
-        List<WeightedRelation> FORelations = Arrays.asList(CAFO, LPFO, CBAFO, COFO, LRFO, FOR, FOTF, FOTU, FOJU);
+//        List<WeightedRelation> FORelations = Arrays.asList(CAFO, LPFO, CBAFO, COFO, LRFO, FOR, FOTF, FOTU, FOJU);
+        List<WeightedRelation> FORelations = Arrays.asList(CAFO, LPFO, CBAFO, COFO, LRFO, FOR, FOTU, FOJU);
         List<WeightedRelation> RRelations = Arrays.asList(CAR, LPR, CBAR, LRR, COR, FOR, RTF, RTU, RJU);
-        List<WeightedRelation> TFRelations = Arrays.asList(CATF, LPTF, CBATF, LRTF, COTF, FOTF, RTF, TFTU, TFJU);
+//        List<WeightedRelation> TFRelations = Arrays.asList(CATF, LPTF, CBATF, LRTF, COTF, FOTF, RTF, TFTU, TFJU);
+        List<WeightedRelation> TFRelations = Arrays.asList(CATF, LPTF, CBATF, LRTF, COTF, RTF, TFTU, TFJU);
         List<WeightedRelation> TURelations = Arrays.asList(CATU, LPTU, CBATU, LRTU, COTU, FOTU, RTU, TFTU, TUJU);
         List<WeightedRelation> JURelations = Arrays.asList(CAJU, LPJU, CBAJU, LRJU, COJU, FOJU, RJU, TFJU, TUJU);
 
