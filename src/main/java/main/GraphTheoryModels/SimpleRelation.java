@@ -1,4 +1,4 @@
-package GraphTheoryModels;
+package main.GraphTheoryModels;
 
 public abstract class SimpleRelation {
     public String idV1;

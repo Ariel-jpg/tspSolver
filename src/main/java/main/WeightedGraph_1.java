@@ -1,16 +1,17 @@
-import DataStructures.AccuStack;
-import DataStructures.AccuStackImm;
-import GraphTheoryModels.DirectedRelation;
-import GraphTheoryModels.SimpleRelation;
-import GraphTheoryModels.Vertex;
-import GraphTheoryModels.WeightedRelation;
+package main;
+
+import main.DataStructures.AccuStack;
+import main.GraphTheoryModels.DirectedRelation;
+import main.GraphTheoryModels.SimpleRelation;
+import main.GraphTheoryModels.Vertex;
+import main.GraphTheoryModels.WeightedRelation;
 
 import java.util.Comparator;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.PriorityQueue;
 
-public class WeightedGraph_1 {
+public class WeightedGraph_1 implements WeightedGraph {
     Hashtable<String, Vertex> vertices;
     PriorityQueue<WeightedRelation> generalMinRelations = new PriorityQueue<>(Comparator.comparingInt(SimpleRelation::getWeight));
     Hashtable<String, Boolean> visited = new Hashtable<>();

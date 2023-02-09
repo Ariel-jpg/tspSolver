@@ -1,8 +1,6 @@
-package DataStructures;
+package main.DataStructures;
 
 import java.util.Hashtable;
-import java.util.Stack;
-import java.util.Vector;
 
 public final class AccuStackImm<E> {
     final Object[] elementData;

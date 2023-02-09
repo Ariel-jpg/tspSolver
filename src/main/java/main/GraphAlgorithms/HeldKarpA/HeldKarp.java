@@ -1,4 +1,4 @@
-package HeldKarpA;
+package main.GraphAlgorithms.HeldKarpA;
 
 import java.util.ArrayList;
 import java.util.HashMap;

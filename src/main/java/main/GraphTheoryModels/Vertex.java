@@ -1,6 +1,6 @@
-package GraphTheoryModels;
+package main.GraphTheoryModels;
 
-import DataStructures.OrderedHasTable;
+import main.DataStructures.OrderedHasTable;
 
 import java.util.Collection;
 import java.util.Comparator;

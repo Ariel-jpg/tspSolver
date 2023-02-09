@@ -1,4 +1,4 @@
-package DataStructures;
+package main.DataStructures;
 
 import java.util.Hashtable;
 import java.util.Stack;

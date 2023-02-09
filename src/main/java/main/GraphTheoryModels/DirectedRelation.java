@@ -1,4 +1,4 @@
-package GraphTheoryModels;
+package main.GraphTheoryModels;
 
 public class DirectedRelation extends SimpleRelation {
     public DirectedRelation(String left, String right, int weight) {

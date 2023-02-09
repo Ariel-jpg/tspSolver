@@ -1,4 +1,4 @@
-package HeldKarpA;
+package main.GraphAlgorithms.HeldKarpA;
 
 public class PairInteger{
     protected int first;

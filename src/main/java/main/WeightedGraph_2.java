@@ -1,10 +1,10 @@
-import DataStructures.AccuStack;
-import DataStructures.AccuStackImm;
-import GraphTheoryModels.SimpleRelation;
-import GraphTheoryModels.Vertex;
-import GraphTheoryModels.WeightedRelation;
+package main;
 
-import javax.swing.event.MenuKeyListener;
+import main.DataStructures.AccuStackImm;
+import main.GraphTheoryModels.SimpleRelation;
+import main.GraphTheoryModels.Vertex;
+import main.GraphTheoryModels.WeightedRelation;
+
 import java.util.*;
 
 public class WeightedGraph_2 {
@@ -36,15 +36,15 @@ public class WeightedGraph_2 {
         }
 
 //        int i = 0;
-
+//
 //        while(!Sf.isEmpty())
 //            if(Sf.remove().getStackValue() == 28) System.out.println(++i);
-
-
+//
+//
 //        AccuStackImm<Vertex> minCH = closeCycle(Sf.remove()), partialCh;
-
-        int hPathWeight, minWeight = 100000;
-
+//
+//        int hPathWeight, minWeight = 100000;
+//
 //        while (!Sf.isEmpty()){
 //            partialCh = closeCycle(Sf.peek());
 //

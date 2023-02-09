@@ -1,13 +1,14 @@
-import DataStructures.AccuStack;
-import DataStructures.AccuStackImm;
-import GraphTheoryModels.DirectedRelation;
-import GraphTheoryModels.Vertex;
-import GraphTheoryModels.WeightedRelation;
+import main.DataStructures.AccuStack;
+import main.DataStructures.AccuStackImm;
+import main.GraphTheoryModels.DirectedRelation;
+import main.GraphTheoryModels.Vertex;
+import main.GraphTheoryModels.WeightedRelation;
+import main.WeightedGraph_1;
+import main.WeightedGraph_2;
 import org.junit.Test;
 
-import HeldKarpA.HeldKarp;
+import main.GraphAlgorithms.HeldKarpA.HeldKarp;
 
-import javax.management.ValueExp;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -196,7 +197,8 @@ public class GraphTheoryModelsTest {
     }
 
 
-    @Test public void generalTestsWeightedGraph_2(){
+    @Test
+    public void generalTestsWeightedGraph_2(){
         Hashtable<String, Vertex> vertices = new Hashtable<>();
 
         Vertex A = new Vertex("A"), B = new Vertex("B"), C = new Vertex("C"), D = new Vertex("D");
@@ -247,7 +249,7 @@ public class GraphTheoryModelsTest {
 
 
         WeightedGraph_2 g = new WeightedGraph_2(vertices);
-        g.getMinHC();
+        AccuStackImm<Vertex> MIN = g.getMinHC();
 
         System.out.println("a");
     }

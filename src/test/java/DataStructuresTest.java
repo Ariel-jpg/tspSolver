@@ -1,6 +1,6 @@
-import DataStructures.AccuStack;
-import DataStructures.AccuStackImm;
-import DataStructures.OrderedHasTable;
+import main.DataStructures.AccuStack;
+import main.DataStructures.AccuStackImm;
+import main.DataStructures.OrderedHasTable;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

@@ -1,4 +1,4 @@
-package GraphTheoryModels;
+package main.GraphTheoryModels;
 
 import java.util.Arrays;
 import java.util.List;
