@@ -40,7 +40,6 @@ public class GraphTheoryModelsTest {
         System.out.println("a");
     }
 
-
     @Test
     public void TestInMultipleCase(){
         int max = 15;
@@ -201,37 +200,44 @@ public class GraphTheoryModelsTest {
     public void generalTestsWeightedGraph_2(){
         Hashtable<String, Vertex> vertices = new Hashtable<>();
 
-        Vertex A = new Vertex("A"), B = new Vertex("B"), C = new Vertex("C"), D = new Vertex("D");
+        Vertex A = new Vertex("A"), B = new Vertex("B"), C = new Vertex("C"), D = new Vertex("D"), E = new Vertex("E");
 
         WeightedRelation wr1 = new WeightedRelation(A, B, 8);
         WeightedRelation wr2 = new WeightedRelation(A, C, 2);
         WeightedRelation wr3 = new WeightedRelation(A, D, 5);
 
-        WeightedRelation wr4 = new WeightedRelation(B, C, 10);
+//        WeightedRelation wr4 = new WeightedRelation(B, C, 10);
         WeightedRelation wr5 = new WeightedRelation(B, D, 3);
 
         WeightedRelation wr6 = new WeightedRelation(C, D, 1);
+
+        WeightedRelation wr7 = new WeightedRelation(C, E, 4);
+        WeightedRelation wr8 = new WeightedRelation(B, E, 15);
 
         A.addRelation(wr1);
         A.addRelation(wr2);
         A.addRelation(wr3);
 
         B.addRelation(wr1);
-        B.addRelation(wr4);
+        B.addRelation(wr8);
         B.addRelation(wr5);
 
         C.addRelation(wr2);
-        C.addRelation(wr4);
+        C.addRelation(wr7);
         C.addRelation(wr6);
 
         D.addRelation(wr3);
         D.addRelation(wr5);
         D.addRelation(wr6);
 
+        E.addRelation(wr7);
+        E.addRelation(wr8);
+
         vertices.put(A.getId(), A);
         vertices.put(B.getId(), B);
         vertices.put(C.getId(), C);
         vertices.put(D.getId(), D);
+        vertices.put(E.getId(), E);
 
         AccuStack<Vertex> acc = new AccuStack<>(), l;
         acc.push(A, 0);
@@ -402,8 +408,6 @@ public class GraphTheoryModelsTest {
 
         return h;
     }
-
-
 
     @Test public void generalTestsModels(){
         Vertex v = new Vertex("v"), w = new Vertex("w"), t = new Vertex("t"), h = new Vertex("h");

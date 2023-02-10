@@ -76,30 +76,32 @@ public class WeightedGraph_2 {
             if (flag) {
                 S = M.remove();
 
-                for(;;){
-                    if(M.isEmpty()) break;
-
-                    if(S.getStackValue() > localMin) {
-                        S = M.remove();
-                        continue;
-                    }
-                    if(!SfFilled) break;
-
-                    if(S.getStackValue() > Sf.peek().getStackValue()) S = M.remove();
-                    else break;
-
-                }
+//                for(;;){
+//                    if(M.isEmpty()) break;
+//
+//                    if(S.getStackValue() > localMin) {
+//                        S = M.remove();
+//                        continue;
+//                    }
+//                    if(!SfFilled) break;
+//
+//                    if(S.getStackValue() > Sf.peek().getStackValue()) S = M.remove();
+//                    else break;
+//
+//                }
 
                  // check immutability
                 v = S.peek();
             }
 
-            if(S.getSize() == vertices.size()){
+            if(S.getSize() == vertices.size()) {
                 Vertex lastVertex = S.peek();
-                int lastRelationWeight = lastVertex.getRelationWith(origin).getWeight();
+                if (lastVertex.getRelationWith(origin) != null){
 
-                Sf.add(S.push(lastVertex, lastRelationWeight));
+                    int lastRelationWeight = lastVertex.getRelationWith(origin).getWeight();
 
+                    Sf.add(S.push(lastVertex, lastRelationWeight));
+                }
 //                hashtable.put(S.hashCode(), origin);
 //                Sf.add(S);
                 SfFilled = true;

@@ -105,12 +105,34 @@ public class TestHeldKarpCases {
 
     @Test
     public void TestCase(){
-        int[][] matrix = getMatrix3();
+        int[][] matrix = getMatrix4();
 
         HeldKarp h = new HeldKarp(matrix, 0);
 
         System.out.println(h.calculateHeldKarp());
         System.out.println(h.getOpt());
+    }
+
+    public int[][] getMatrix4(){
+        int[][] matrix = new int[5][5];
+
+        matrix[0][1] = 8;
+        matrix[0][2] = 2;
+        matrix[0][3] = 5;
+        matrix[0][4] = 30;
+
+        matrix[1][2] = 10;
+        matrix[1][3] = 3;
+        matrix[1][4] = 15;
+
+        matrix[2][3] = 1;
+        matrix[2][4] = 4;
+
+        matrix[3][4] = 48;
+
+        completeSymmetry(matrix);
+
+        return matrix;
     }
 
     public void completeSymmetry(int[][] matrix){
