@@ -5,9 +5,16 @@ import java.util.List;
 
 // Simple weighted Relation
 public class WeightedRelation extends SimpleRelation {
+    @Override
+    public String toString() {
+        return idV1 + " <--> "  + idV2 + ": " + weight;
+    }
+
     public WeightedRelation(Vertex v1, Vertex v2, int weight){
         super(v1, v2);
         this.weight = weight;
+        v1.addRelation(this);
+        v2.addRelation(this);
     }
 
     public List<DirectedRelation> generateOrderedPairs() {

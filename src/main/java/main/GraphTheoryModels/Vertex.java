@@ -8,6 +8,7 @@ import java.util.PriorityQueue;
 
 public class Vertex {
     String id;
+    int degree = 0;
 
     // The relations are indexed by the other Vertex (v --> w, so the index is w)
     public OrderedHasTable<String, WeightedRelation> relations = new OrderedHasTable<>(Comparator.comparingInt(WeightedRelation::getWeight));
@@ -22,9 +23,19 @@ public class Vertex {
     public void addRelation(WeightedRelation wr) {
         if(wr.idV1.equals(id)) relations.put(wr.idV2, wr);
         else relations.put(wr.idV1, wr);
+
+        degree++;
     } // Check the wr hashcode
 
+    public void removeRelation(WeightedRelation wr) {
+        if(wr.idV1.equals(id)) relations.remove(wr.idV2);
+        else relations.remove(wr.idV1);
+
+        degree--;
+    }
+
     public WeightedRelation getRelationWith(Vertex w){ return relations.get(w.getId()); }
+    public boolean containsRelationWith(Vertex w){ return relations.get(w.getId()) != null; }
     public WeightedRelation getMinRelation(){ return relations.getMin(); }
 
     public void setRelations(Collection<WeightedRelation> relations){
