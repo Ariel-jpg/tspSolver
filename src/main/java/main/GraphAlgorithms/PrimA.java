@@ -9,15 +9,20 @@ public class PrimA {
     // Define the count of vertices available in the graph  
     private final int countOfVertices;
     int[][] matrix;
+    String[] identifiers;
 
-    public PrimA(int[][] matrix){
+    int finalMinimumWeight;
+
+    public int getFinalMinimumWeight() { return finalMinimumWeight; }
+
+    public PrimA(int[][] matrix, String[] identifiers){
         countOfVertices = matrix.length;
         this.matrix = matrix;
+        this.identifiers = identifiers;
     }
 
     // create findMinKeyVertex() method for finding the vertex v that has minimum key-value and that is not added MST yet  
-    int findMinKeyVertex(int keys[], Boolean setOfMST[])
-    {
+    int findMinKeyVertex(int keys[], Boolean setOfMST[]) {
         // Initialize min value and its index  
         int minimum_index = -1;
         int minimum_value = Integer.MAX_VALUE;
@@ -33,11 +38,20 @@ public class PrimA {
     }
 
     // create showMinimumSpanningTree for printing the constructed MST stored in mstArray[]   
-    void showMinimumSpanningTree(int mstArray[], int graphArray[][])
-    {
-        System.out.println("Edge \t\t Weight");
-        for (int j = 1; j < countOfVertices; j++)
-            System.out.println(mstArray[j] + " <-> " + j + "\t \t" + graphArray[j][mstArray[j]]);
+    void showMinimumSpanningTree(int mstArray[], int graphArray[][]) {
+        int totalWeight = 0;
+
+//        System.out.println("Edge \t\t Weight");
+        for (int j = 1; j < countOfVertices; j++) {
+//            String identifier1 = identifiers[mstArray[j]], identifier2 = identifiers[j];
+            int weight = graphArray[j][mstArray[j]];
+
+//            System.out.println(identifier1 + " <-> " + identifier2 + "\t \t" + graphArray[j][mstArray[j]]);
+            totalWeight += weight;
+        }
+
+        finalMinimumWeight = totalWeight;
+//        System.out.println("The total weight of spanning tree is: " + totalWeight);
     }
 
     // create designMST() method for constructing and printing the MST. The graphArray[][] is an adjacency matrix that defines the graph for MST.  
